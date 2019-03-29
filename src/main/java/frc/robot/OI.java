@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Supplier;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.command.ChangeCameraView;
 import frc.robot.command.DriveStraight;
 import frc.robot.command.InvertDriveTrain;
@@ -48,11 +49,22 @@ public class OI {
             runWhile(() -> xboxController.getLeftYActive() || xboxController.getRightYActive(),
                     new TankDrive(xboxController::getLeftY, xboxController::getRightY));
             runWhile(xboxController::getAButton, new InvertDriveTrain());
+
+            Trigger precisionTrigger = new Trigger(xboxController::getRightBumper);
+            precisionTrigger.whenActive(new InstantCommand() {
+                public void execute() {
+                    xboxController.setJoystickScale(0.5);
+                }
+            });
+            precisionTrigger.whenInactive(new InstantCommand() {
+                public void execute() {
+                    xboxController.setJoystickScale(1.0);
+                }
+            });
         }
 
         if (BackCams.isEnabled()) {
             runWhile(xboxController::getRightBumper, new SpinBackCams(() -> 0.8));
-
             runWhile(xboxController::getLeftBumper, new SpinBackCams(() -> -1.0));
         }
 

@@ -7,6 +7,7 @@ import frc.robot.log.Loggable;
 public class Xbox360Controller extends XboxController implements Loggable {
     private double joystickDeadband = 0.1;
     private double triggerDeadband = 0.1;
+    private double joystickScale = 1.0;
 
     public Xbox360Controller(int port) {
         super(port);
@@ -29,7 +30,7 @@ public class Xbox360Controller extends XboxController implements Loggable {
 
     @Override
     public double getY(Hand hand) {
-        return Math.abs(super.getY(hand)) > joystickDeadband ? super.getY(hand) : 0;
+        return Math.abs(super.getY(hand)) > joystickDeadband ? super.getY(hand) * joystickScale : 0;
     }
 
     public double getLeftY() {
@@ -76,6 +77,14 @@ public class Xbox360Controller extends XboxController implements Loggable {
 
     public void setTriggerDeadband(double triggerDeadband) {
         this.triggerDeadband = triggerDeadband;
+    }
+
+    public double getJoystickScale() {
+        return joystickScale;
+    }
+
+    public void setJoystickScale(double joystickScale) {
+        this.joystickScale = joystickScale;
     }
 
     @Override

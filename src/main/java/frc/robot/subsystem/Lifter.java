@@ -43,10 +43,18 @@ public class Lifter extends BadSubsystem {
     public void initComponents() {
         motor = new CANSparkMax(RobotMap.LIFTER_MOTOR, MotorType.kBrushless);
         motor.setInverted(true);
-        motor.getPIDController().setOutputRange(-0.35, 0.85);
+
+        // KNOWN GOOD VALUES
+        motor.getPIDController().setOutputRange(-0.35, 0.95);
         motor.getPIDController().setP(0.1);
-        motor.getPIDController().setI(0);
-        motor.getPIDController().setD(0);
+        motor.getPIDController().setI(0.0);
+        motor.getPIDController().setD(0.0);
+
+        // TEST I/D values
+        // motor.getPIDController().setOutputRange(-0.35, 0.95);
+        // motor.getPIDController().setP(0.075);
+        // motor.getPIDController().setI(0.0001);
+        // motor.getPIDController().setD(0.01);
 
         DigitalInput bottomLimitSwitchDI = new DigitalInput(10);
 

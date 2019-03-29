@@ -15,7 +15,7 @@ public class Articulator extends BadSubsystem {
     @Override
     public void initComponents() {
         motor = new CANTalonSRX(RobotMap.ARTICULATOR_MOTOR);
-        motor.overrideSoftLimitsEnable(false);
+        // motor.overrideSoftLimitsEnable(false);
         motor.setNeutralMode(NeutralMode.Brake);
     }
 
