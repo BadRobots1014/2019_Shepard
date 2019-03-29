@@ -61,6 +61,8 @@ public class OI {
                     xboxController.setJoystickScale(1.0);
                 }
             });
+
+            binds.add(precisionTrigger);
         }
 
         if (BackCams.isEnabled()) {
