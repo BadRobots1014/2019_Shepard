@@ -3,10 +3,8 @@ package frc.robot.subsystem;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
 import frc.robot.RobotMap;
-import frc.robot.Trigger;
 
 /**
  * Represents the lifter that elevates the claw to various heights
@@ -37,7 +35,7 @@ public class Lifter extends BadSubsystem {
     }
 
     protected CANSparkMax motor;
-    protected Trigger bottomLimitSwitch;
+    // protected Trigger bottomLimitSwitch;
 
     @Override
     public void initComponents() {
@@ -56,16 +54,15 @@ public class Lifter extends BadSubsystem {
         // motor.getPIDController().setI(0.0001);
         // motor.getPIDController().setD(0.01);
 
-        DigitalInput bottomLimitSwitchDI = new DigitalInput(10);
+        // DigitalInput bottomLimitSwitchDI = new DigitalInput(10);
 
-        bottomLimitSwitch = new Trigger(bottomLimitSwitchDI::get) {
-            @Override
-            public void close() {
-                super.close();
-                bottomLimitSwitchDI.close();
-            }
-        };
-        // bottomLimitSwitch.whenActive(new ZeroEncoder());
+        // bottomLimitSwitch = new Trigger(() -> !bottomLimitSwitchDI.get()) {
+        //     @Override
+        //     public void close() {
+        //         super.close();
+        //         bottomLimitSwitchDI.close();
+        //     }
+        // };
     }
 
     @Override
@@ -82,6 +79,12 @@ public class Lifter extends BadSubsystem {
                 motor.getPIDController()::setD);
         // addChild(motor);
     }
+
+    @Override
+    public void initDefaultCommand() {
+        // bottomLimitSwitch.whenActive(new ZeroEncoder());
+    }
+
 
     /**
      * Move the lifter up or down at a given speed where +1 speed is full speed upwards and -1 is
@@ -123,7 +126,7 @@ public class Lifter extends BadSubsystem {
     @Override
     public void close() {
         motor.close();
-        bottomLimitSwitch.close();
+        // bottomLimitSwitch.close();
     }
 
     @Override

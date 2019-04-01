@@ -110,7 +110,7 @@
               "_source0": "camera_server://POV",
               "_title": "POV",
               "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Crosshair/Crosshair color": "#00FF00FF",
               "Controls/Show controls": true,
               "Controls/Rotation": "NONE",
               "compression": 53.0,
